@@ -1,0 +1,17 @@
+{
+  "extends": ["react-app", "standard", "standard-react", "plugin:import/errors"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-curly-spacing": [2, {"when": "never", "spacing": {
+      "objectLiterals": "never"
+    }}],
+    "react/jsx-handler-names": ["error", {
+      "eventHandlerPrefix": "handle",
+      "eventHandlerPropPrefix": "on"
+    }],
+    "react/sort-comp": ["error"],
+    "object-curly-spacing": ["error", "always"],
+    "jsx-quotes": ["error", "prefer-single"]
+  }
+}

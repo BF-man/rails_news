@@ -6,9 +6,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= stylesheet_pack_tag 'rails-news' %>
   </head>
 
   <body>
+    <%= javascript_pack_tag 'rails-news' %>
     <%= yield %>
   </body>
 </html>
