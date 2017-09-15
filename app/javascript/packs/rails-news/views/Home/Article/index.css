@@ -1,0 +1,21 @@
+.rn-Article {
+  margin-top: 5rem;
+  width: 50rem;
+}
+
+.rn-ArticleRow {
+  width: 100%;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  display: flex;
+
+  &-title {
+    width: 20%;
+  }
+
+  &-value {
+    width: 80%;
+  }
+}

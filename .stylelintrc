@@ -1,0 +1,22 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-selector-bem-pattern"
+  ],
+  "rules": {
+    "property-no-unknown": [true, { ignoreProperties: ["lost-utility", "lost-column", "lost-offset"] }],
+    "string-quotes": "double",
+    "selector-attribute-quotes": "always",
+    "function-url-quotes": "always",
+    "declaration-property-unit-whitelist": { "font-size": "rem" },
+    "max-nesting-depth": [4],
+    "plugin/selector-bem-pattern": {
+      "preset": "suit",
+      "componentName": "^[A-Z][a-zA-Z0-9]+$",
+      "componentSelectors": {
+        "initial": "^\\.sb-{componentName}(-?-[a-z][a-zA-Z]+){0,4}?(\\.is(-[a-z0-9][a-zA-Z0-9]*)+)?$",
+        "combined": "^([a-z]+|.bf-[-a-zA-Z]+)$"
+      }
+    }
+  }
+}
