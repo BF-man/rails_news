@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912193424) do
+ActiveRecord::Schema.define(version: 20170914213220) do
 
   create_table "articles", force: :cascade do |t|
     t.datetime "published_at"
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 20170912193424) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "expires_at"
+    t.string "guid"
+    t.index ["guid"], name: "index_articles_on_guid", unique: true
   end
 
 end

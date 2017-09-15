@@ -1,4 +1,4 @@
 :schedule:
   news_sync_worker:
-    cron: '0 */5 * * * *'   # Runs when second = 0, every 5 minutes
+    cron: '0 * * * * *'   # Runs once per minute
     class: NewsSyncWorker
