@@ -1,0 +1,1 @@
+import './rails-news/index'
