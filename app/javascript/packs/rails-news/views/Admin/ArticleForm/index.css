@@ -2,7 +2,7 @@
 
 .rn-ArticleForm {
   width: 50rem;
-  margin-top: 5rem;
+  margin-top: 7rem;
 
   &-expiresAt,
   &-description,
@@ -38,5 +38,12 @@
   &-description.has-error,
   &-title.has-error {
     border: 0.2rem solid var(--red);
+  }
+
+  &-submitted {
+    font-size: 1.6rem;
+    color: var(--green);
+    text-align: center;
+    margin-top: 1rem;
   }
 }

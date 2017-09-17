@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { ActionCable } from 'react-actioncable-provider'
 import { camelizeKeys, decamelizeKeys } from 'humps'
+import { RingLoader } from 'react-spinners'
 import { ArticleForm } from './ArticleForm'
 import './index.css'
 
 export class Admin extends Component {
-  state = { article: {} }
+  state = { article: {}, showSpinner: true }
 
   handleReceived = (article) => {
     const camelizedArticle = camelizeKeys(article)
     const { expiresAt, publishedAt, ...articleParams } = camelizedArticle
     articleParams.expiresAt = new Date(expiresAt)
     articleParams.publishedAt = new Date(publishedAt)
-    this.setState({ article: articleParams })
+    this.setState({ article: articleParams, showSpinner: false })
   }
 
   handleConnected = () => { this.cableRef.perform('get_article') }
@@ -24,9 +25,10 @@ export class Admin extends Component {
   }
 
   render () {
-    const { article } = this.state
+    const { article, showSpinner } = this.state
     return (
       <div className='rn-Admin'>
+        { showSpinner ? <RingLoader /> : null}
         <ActionCable
           ref={this.handleActionCableRef}
           channel={{ channel: 'ArticleChannel' }}

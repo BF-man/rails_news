@@ -5,28 +5,40 @@ import cs from 'classnames'
 import './index.css'
 
 export class ArticleForm extends PureComponent {
-  state = { title: '', description: '', expiresAt: '', errors: {} }
+  state = { values: { title: '', description: '', expiresAt: '' }, errors: {}, submitted: false }
 
   componentWillReceiveProps ({ initialValues: { title, description, expiresAt } }) {
-    if (title && description && expiresAt) this.setState({ title, description, expiresAt })
+    if (title && description && expiresAt) this.setState({ values: { title, description, expiresAt } })
   }
 
-  handleTitleChange = (e) => { this.setState({ title: e.target.value }) }
+  componentWillUnmount () {
+    clearTimeout(this.submittedTimeoutId)
+  }
 
-  handleDescriptionChange = (e) => { this.setState({ description: e.target.value }) }
+  handleTitleChange = (e) => {
+    this.setState({ values: { ...this.state.values, title: e.target.value } })
+  }
+
+  handleDescriptionChange = (e) => {
+    this.setState({ values: { ...this.state.values, description: e.target.value } })
+  }
 
   handleExpiresAtChange = (momentDate) => {
     if (!moment.isMoment(momentDate)) return this.setState({ expiresAt: '' })
-    this.setState({ expiresAt: momentDate.toDate() })
+    this.setState({ values: { ...this.state.values, expiresAt: momentDate.toDate() } })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
     const { onSubmit } = this.props
-    const { errors: _errors, ...payload } = this.state
+    const { values: payload } = this.state
     const errors = validate(payload)
     this.setState({ errors })
-    if (Object.keys(errors).length === 0) return onSubmit(payload)
+    if (Object.keys(errors).length === 0) {
+      onSubmit(payload)
+      this.setState({ submitted: true })
+      this.submittedTimeoutId = setTimeout(() => this.setState({ submitted: false }), 5000)
+    }
   }
 
   get titleClassName () {
@@ -44,8 +56,12 @@ export class ArticleForm extends PureComponent {
     return cs('rn-ArticleForm-expiresAt', { 'has-error': expiresAt })
   }
 
+  handleValidDate (currentDate) {
+    return currentDate >= moment().startOf('day')
+  }
+
   render () {
-    const { description, title, expiresAt } = this.state
+    const { values: { description, title, expiresAt }, submitted } = this.state
     return (
       <div className='rn-ArticleForm'>
         <form onSubmit={this.handleSubmit}>
@@ -69,8 +85,10 @@ export class ArticleForm extends PureComponent {
             dateFormat={'DD.MM.YYYY'}
             timeFormat='HH:mm Z'
             value={expiresAt}
+            isValidDate={this.handleValidDate}
           />
           <button className='rn-ArticleForm-button' type='submit'>submit</button>
+          {submitted ? <div className='rn-ArticleForm-submitted'>Submitted successfully</div> : null}
         </form>
       </div>
     )
@@ -82,5 +100,6 @@ const validate = ({ description, title, expiresAt }) => {
   if (!description) errors.description = 'Required field'
   if (!title) errors.title = 'Required field'
   if (!expiresAt) errors.expiresAt = 'Required field'
+  if (expiresAt && expiresAt < new Date()) errors.expiresAt = 'Date is in the past'
   return errors
 }
