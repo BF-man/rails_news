@@ -1,1 +1,1 @@
-export const BACKEND_ACTION_CABLE_URL = 'ws://localhost:5000/cable'
+export const BACKEND_ACTION_CABLE_URL = document.head.querySelector("[name=action-cable-url]").content

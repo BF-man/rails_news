@@ -2,4 +2,12 @@
   display: flex;
   justify-content: center;
   min-width: 100%;
+
+  & > .react-spinners--ring {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+    z-index: 1;
+  }
 }

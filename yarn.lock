@@ -1861,6 +1861,10 @@ domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
 
+domkit@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/domkit/-/domkit-0.0.1.tgz#88399d586794efc1154fec6c22cfe50f19bd4dbb"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -4902,6 +4906,12 @@ react-router@^3.0.2:
     loose-envify "^1.2.0"
     prop-types "^15.5.6"
     warning "^3.0.0"
+
+react-spinners@^0.0.30:
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.0.30.tgz#dd2a2e16794c38f42e6da8f49aa16d9ceb338e7d"
+  dependencies:
+    domkit "^0.0.1"
 
 react@^15.6.1:
   version "15.6.1"
